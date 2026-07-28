@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Untuk Stepanii Imut 💕</title>
+  <!-- Menggunakan font Google Fonts 'Quicksand' dan 'Sacramento' yang manis dan estetik -->
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&family=Sacramento&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #ffe6eb;
+      --envelope-color: #ffb6c1;
+      --envelope-dark: #ff9eaa;
+      --card-bg: #ffffff;
+      --text-color: #d63384;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      /* Mengganti font menjadi Quicksand yang lebih rapi, modern, dan estetik */
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Floating Hearts Animation */
+    .heart-particle {
+      position: absolute;
+      color: #fff;
+      font-size: 20px;
+      user-select: none;
+      pointer-events: none;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.8;
+      text-shadow: 0 0 5px rgba(255, 182, 193, 0.8);
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) scale(0.5) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.2) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .container {
+      text-align: center;
+      z-index: 10;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .header-title {
+      color: var(--text-color);
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      animation: pulse 1.5s infinite alternate;
+      font-family: 'Sacramento', cursive; /* Judul dengan gaya tulisan tangan yang cantik */
+      font-size: 2.8rem;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.05); }
+    }
+
+    /* Envelope Styling */
+    .envelope-wrapper {
+      position: relative;
+      width: 320px;
+      height: 220px;
+      background-color: var(--envelope-dark);
+      margin: 0 auto;
+      border-radius: 0 0 15px 15px;
+      box-shadow: 0 10px 25px rgba(214, 51, 132, 0.3);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .envelope-wrapper:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Envelope Flap (Segitiga Atas) */
+    .envelope-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 160px solid transparent;
+      border-right: 160px solid transparent;
+      border-top: 120px solid var(--envelope-color);
+      transform-origin: top;
+      transition: transform 0.5s ease 0.3s, z-index 0.2s ease 0.3s;
+      z-index: 3;
+    }
+
+    /* Lipatan Depan Amplop */
+    .envelope-front {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 160px solid var(--envelope-color);
+      border-right: 160px solid var(--envelope-color);
+      border-bottom: 110px solid #ff8597;
+      border-radius: 0 0 15px 15px;
+      z-index: 3;
+    }
+
+    .stiker-hati {
+      position: absolute;
+      top: 90px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 35px;
+      z-index: 4;
+      transition: opacity 0.3s;
+      animation: bounce 1s infinite alternate;
+    }
+
+    @keyframes bounce {
+      0% { transform: translateX(-50%) translateY(0); }
+      100% { transform: translateX(-50%) translateY(-5px); }
+    }
+
+    /* Card Inside - Kartu keluar ke arah bawah/depan */
+    .card {
+      position: absolute;
+      top: 110px;
+      left: 20px;
+      width: 280px;
+      height: 0px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 0 20px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+      transition: all 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+      z-index: 1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+    }
+
+    /* Open Envelope Animation */
+    .envelope-wrapper.open::before {
+      transform: rotateX(180deg);
+      z-index: 1;
+    }
+
+    .envelope-wrapper.open .card {
+      top: 140px; /* Kartu meluncur ke bawah */
+      height: auto;
+      padding: 20px;
+      z-index: 6;
+      opacity: 1;
+      box-shadow: 0 15px 35px rgba(214, 51, 132, 0.25);
+    }
+
+    .envelope-wrapper.open .stiker-hati {
+      opacity: 0;
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      color: var(--text-color);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .card-message {
+      font-size: 0.9rem;
+      color: #444;
+      line-height: 1.6;
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .btn-secret {
+      background: #ff4d6d;
+      color: white;
+      border: none;
+      padding: 9px 18px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255, 77, 109, 0.4);
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-secret:hover {
+      background: #c9184a;
+      transform: scale(1.05);
+    }
+
+    .click-hint {
+      margin-top: 40px;
+      color: #ff6b8b;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Musik Latar Romantis (Instrumen Lembut) -->
+  <audio id="bg-music" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=sweet-love-111663.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="container">
+    <h2 class="header-title">Special For Stepanii Imut 🤍</h2>
+
+    <div class="envelope-wrapper" id="envelope">
+      <div class="stiker-hati">💌</div>
+      <div class="card">
+        <div class="card-title">Untuk Sayangnya Trapiss ✨</div>
+        <div class="card-message">
+          "Makasih banyak yaa udah mau terima aku. Jujur kepikiran, andai dari dulu kita udah saling kenal dan deket, pasti dari kemarin-kemarin udah seru banget. Tapi gapapa, yang penting sekarang kamu udah jadi punya aku. Makasih yaa udah buat hari ini makin spesial! Ke depannya bakal aku usahain, aku perjuangin, di-eman, dan disayang banget pokoknya."
+        </div>
+        <!-- Tombol langsung ke WhatsApp +62 851-1311-156 -->
+        <a href="https://wa.me/628511311156?text=Halo%20Trapiss,%20aku%20mau%20balas%20pesannya...%20💖" class="btn-secret" target="_blank">Balas ke WA Trapiss 💌</a>
+      </div>
+      <div class="envelope-front"></div>
+    </div>
+
+    <p class="click-hint" id="hint">✨ Klik amplopnya untuk membuka ✨</p>
+  </div>
+
+  <script>
+    const envelope = document.getElementById('envelope');
+    const hint = document.getElementById('hint');
+    const music = document.getElementById('bg-music');
+    let isOpen = false;
+
+    // Buka / Tutup Amplop & Putar Musik
+    envelope.addEventListener('click', function(e) {
+      if (e.target.classList.contains('btn-secret')) return;
+      
+      isOpen = !isOpen;
+      if (isOpen) {
+        envelope.classList.add('open');
+        hint.innerText = "✨ Tap amplop lagi untuk menutup ✨";
+        music.play().catch(() => {});
+      } else {
+        envelope.classList.remove('open');
+        hint.innerText = "✨ Klik amplopnya untuk membuka ✨";
+      }
+    });
+
+    // Efek Bunga/Hati Putih Melayang
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart-particle');
+      
+      const shapes = ['🤍', '🌸', '✨', '🤍', '💖'];
+      heart.innerText = shapes[Math.floor(Math.random() * shapes.length)];
+      
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+      
+      document.body.appendChild(heart);
+      
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+
+    setInterval(createHeart, 300);
+  </script>
+</body>
+</html>
